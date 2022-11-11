@@ -30,4 +30,8 @@ public class Coordinate {
     public void setY(int y) {
         this.y = y;
     }
+
+    public double distance(Coordinate coordinate) {
+        return Math.sqrt(Math.pow(this.x - coordinate.x, 2) + Math.pow(this.y - coordinate.y, 2));
+    }
 }

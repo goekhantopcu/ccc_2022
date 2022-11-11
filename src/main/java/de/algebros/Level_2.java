@@ -12,6 +12,8 @@ public class Level_2 {
 
         Coordinate coordinate = new Coordinate(lines.get(lineCount + 1));
 
+
+
         int coinCounter = 0;
         final char[] actions = lines.get(lines.size() - 1).toCharArray();
         for (char action : actions) {
