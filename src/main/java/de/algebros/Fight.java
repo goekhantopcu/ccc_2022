@@ -8,8 +8,22 @@ public class Fight {
     private List<Fighter> fighters = new ArrayList<>();
 
     public Fight(String fighters) {
-        for (char c : fighters.toCharArray()) {
-            this.fighters.add(Fighter.findFighterById("" + c));
+        int tournamentsize = fighters.length();
+        String a = "";
+        String b = "";
+        boolean large = false;
+        if (tournamentsize > 2) {
+            a = new Fight(fighters.substring(0, tournamentsize / 2)).findWinner().getId();
+            b = new Fight(fighters.substring(tournamentsize / 2)).findWinner().getId();
+            large = true;
+        }
+        if (large) {
+
+            this.fighters.add(Fighter.findFighterById(a));
+            this.fighters.add(Fighter.findFighterById(b));
+        } else {
+            this.fighters.add(Fighter.findFighterById(fighters.substring(0, 1)));
+            this.fighters.add(Fighter.findFighterById(fighters.substring(1)));
         }
     }
 
@@ -30,7 +44,7 @@ public class Fight {
     }
 
     public static void initFights() {
-        final List<String> lines = Common.readFile("level1/level1_1.in");
+        final List<String> lines = Common.readFile("level2/level2_1.in");
         final List<Fight> fights = lines.subList(1, lines.size()).stream()
                 .map(Fight::new)
                 .collect(Collectors.toList());

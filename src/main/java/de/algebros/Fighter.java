@@ -14,6 +14,7 @@ public class Fighter {
     private List<Fighter> winsAgainst = new ArrayList<>();
 
     public Fighter(String id) {
+
         this.id = id;
     }
 
