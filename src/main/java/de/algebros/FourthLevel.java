@@ -31,6 +31,7 @@ public class FourthLevel {
         fights.forEach(fight -> {
 
         });
+        
     }
 
     public static Map<String, Integer> findAmounts(String fight) {

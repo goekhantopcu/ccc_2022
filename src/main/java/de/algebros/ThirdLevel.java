@@ -28,8 +28,8 @@ public class ThirdLevel {
 
         final List<String> originals = lines.subList(1, lines.size());
         final List<String> rigged = originals.stream().map(normal -> rigLine(normal)).collect(Collectors.toList());
-        rigged.forEach(System.out::println);
-
+        // rigged.forEach(System.out::println);
+        Common.writeFile(rigged, "level4/solution.out");
     }
 
     private static String rigLine(String normal) {
