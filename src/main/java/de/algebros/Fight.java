@@ -10,7 +10,6 @@ public class Fight {
     public Fight(String fighters) {
         for (char c : fighters.toCharArray()) {
             this.fighters.add(Fighter.findFighterById("" + c));
-            System.out.println("Fighters: " + this.fighters.size());
         }
     }
 
