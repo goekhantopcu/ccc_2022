@@ -43,7 +43,7 @@ public class ThirdLevel {
         int availableScissors = getScissors(normal);
         StringBuilder result = new StringBuilder();
         int papercount = 0;
-        if (availableRock % 4 == 3) {
+        if (availableRock % 4 == 3 && availableScissors > 1) {
             result.append("R");
             availableRock--;
             result.append("S");
