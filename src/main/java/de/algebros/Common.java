@@ -1,15 +1,28 @@
 package de.algebros;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Common {
+    public static void writeFile(List<String> lines, String fileName) {
+        String path = "src/main/resources/solutions/" + fileName;
+        try {
+            File file = new File(path);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            for (String s : lines) {
+                writer.write(s);
+                writer.newLine(); // neue Zeile hinzufügen
+            }
+            writer.close();
+            System.out.println("Die Datei wurde erfolgreich erstellt und mit Strings befüllt.");
+        } catch (IOException e) {
+            System.err.println("Fehler beim Erstellen der Datei: " + e.getMessage());
+        }
+    }
+
     public static List<String> readFile(String name) {
         try {
             final InputStream in = Common.class.getClassLoader().getResourceAsStream(name);

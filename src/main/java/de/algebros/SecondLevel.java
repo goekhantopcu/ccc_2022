@@ -21,7 +21,7 @@ public class SecondLevel {
         paper.getWinsAgainst().add(rock);
         scissor.getWinsAgainst().add(paper);
 
-        final List<String> lines = Common.readFile("level2/level2_5.in");
+        final List<String> lines = Common.readFile("solution.in");
         int rounds = Integer.parseInt(lines.get(0).split(" ")[0]);
 
         final List<List<Fighter>> tournaments = lines.subList(1, lines.size())
@@ -41,7 +41,7 @@ public class SecondLevel {
         if (round >= rounds) {
             return fighters;
         }
-        if (round == 2) {
+        if (round == 5) {
             return fighters;
         }
         final List<Fight> fights = toPartitions(fighters, 2).stream()
