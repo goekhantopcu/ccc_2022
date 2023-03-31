@@ -20,11 +20,18 @@ public class ThirdLevel {
 
         final List<String> lines = Common.readFile("level3/level3_1.in");
         int rounds = Integer.parseInt(lines.get(0).split(" ")[0]);
+        /*
+         * System.out.println("Rocks:" + getRocks(lines.get(1)));
+         * System.out.println("Papers:" + getPapers(lines.get(1)));
+         * System.out.println("Scissors:" + getScissors(lines.get(1)));
+         */
 
         final List<List<Fighter>> tournaments = lines.subList(1, lines.size())
                 .stream()
-                .map(tournament -> tournament.chars().mapToObj(fighterId -> (char) fighterId).collect(Collectors.toList()))
-                .map(fighterIds -> fighterIds.stream().map(fighterId -> Fighter.findFighterById(fighterId.toString())).collect(Collectors.toList()))
+                .map(tournament -> tournament.chars().mapToObj(fighterId -> (char) fighterId)
+                        .collect(Collectors.toList()))
+                .map(fighterIds -> fighterIds.stream().map(fighterId -> Fighter.findFighterById(fighterId.toString()))
+                        .collect(Collectors.toList()))
                 .collect(Collectors.toList());
 
         for (List<Fighter> tournament : tournaments) {
@@ -55,4 +62,20 @@ public class ThirdLevel {
         }
         return partitions;
     }
+
+    public static int getRocks(String line) {
+        // Format: 8R 5P 19S
+        return Integer.parseInt(line.split(" ")[0].split("R")[0]);
+    }
+
+    public static int getPapers(String line) {
+        // Format: 8R 5P 19S
+        return Integer.parseInt(line.split(" ")[1].split("P")[0]);
+    }
+
+    public static int getScissors(String line) {
+        // Format: 8R 5P 19S
+        return Integer.parseInt(line.split(" ")[2].split("S")[0]);
+    }
+
 }
