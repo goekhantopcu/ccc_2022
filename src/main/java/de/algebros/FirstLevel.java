@@ -1,7 +1,5 @@
 package de.algebros;
 
-import java.util.ArrayList;
-
 public class FirstLevel {
     public static void main(String[] args) {
         final Fighter rock = new Fighter("R");
@@ -15,7 +13,5 @@ public class FirstLevel {
         rock.getWinsAgainst().add(scissor);
         paper.getWinsAgainst().add(rock);
         scissor.getWinsAgainst().add(paper);
-
-        Fight.initFights();
     }
 }

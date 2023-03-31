@@ -2,7 +2,6 @@ package de.algebros;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Fight {
     private List<Fighter> fighters = new ArrayList<>();
@@ -11,6 +10,10 @@ public class Fight {
         for (char c : fighters.toCharArray()) {
             this.fighters.add(Fighter.findFighterById("" + c));
         }
+    }
+
+    public Fight(List<Fighter> fighters) {
+        this.fighters = fighters;
     }
 
     public Fighter findWinner() {
@@ -27,13 +30,5 @@ public class Fight {
             }
         }
         return null;
-    }
-
-    public static void initFights() {
-        final List<String> lines = Common.readFile("level1/level1_1.in");
-        final List<Fight> fights = lines.subList(1, lines.size()).stream()
-                .map(Fight::new)
-                .collect(Collectors.toList());
-        fights.forEach(fight -> System.out.println(fight.findWinner().getId()));
     }
 }
