@@ -19,26 +19,51 @@ public class ThirdLevel {
         scissor.getWinsAgainst().add(paper);
 
         final List<String> lines = Common.readFile("level3/level3_1.in");
-        int rounds = Integer.parseInt(lines.get(0).split(" ")[0]);
         /*
+         * int rounds = Integer.parseInt(lines.get(0).split(" ")[0]);
          * System.out.println("Rocks:" + getRocks(lines.get(1)));
          * System.out.println("Papers:" + getPapers(lines.get(1)));
          * System.out.println("Scissors:" + getScissors(lines.get(1)));
          */
 
-        final List<List<Fighter>> tournaments = lines.subList(1, lines.size())
-                .stream()
-                .map(tournament -> tournament.chars().mapToObj(fighterId -> (char) fighterId)
-                        .collect(Collectors.toList()))
-                .map(fighterIds -> fighterIds.stream().map(fighterId -> Fighter.findFighterById(fighterId.toString()))
-                        .collect(Collectors.toList()))
-                .collect(Collectors.toList());
+        final List<String> originals = lines.subList(1, lines.size());
+        final List<String> rigged = originals.stream().map(normal -> rigLine(normal)).collect(Collectors.toList());
+        rigged.forEach(System.out::println);
 
-        for (List<Fighter> tournament : tournaments) {
-            final List<Fighter> winners = runTournament(tournament, rounds, 0);
-            final List<String> winnerIds = winners.stream().map(Fighter::getId).collect(Collectors.toList());
-            System.out.println(String.join("", winnerIds));
+    }
+
+    private static String rigLine(String normal) {
+        // after 2 rounds rock should not survive,
+        // we need tu use all rocks and then put papers in with groups of 3 rocks
+        // after this is done, we can be sure there are no rocks in the second stage and
+        // we fill with remaining paper and scissors
+
+        int availableRock = getRocks(normal);
+        int availablePaper = getPapers(normal);
+        int availableScissors = getScissors(normal);
+        StringBuilder result = new StringBuilder();
+        int papercount = 0;
+        while (availableRock > 0) {
+            papercount++;
+            if (papercount == 4) {
+                result.append("P");
+                availablePaper--;
+                papercount = 0;
+            } else {
+
+                result.append("R");
+                availableRock--;
+            }
         }
+        while (availablePaper > 0) {
+            result.append("P");
+            availablePaper--;
+        }
+        while (availableScissors > 0) {
+            result.append("S");
+            availableScissors--;
+        }
+        return result.toString();
     }
 
     public static List<Fighter> runTournament(List<Fighter> fighters, int rounds, int round) {
